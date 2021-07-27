@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+
+body {
+    background-color: #e5e5e5;
+}
+
+.titulo {
+    font-family: 'Roboto', sans-serif;
+    font-size: 56px;
+    font-weight: 700;
+    color: #75b79e;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 40px 50px 50px;
+}
+
+.conteudo {
+    width: 100%;
+    padding: 0 120px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.carta {
+    width: 117px;
+    height: 146px;
+    margin: 0 35px 35px 0;
+    position: relative;
+}
+
+.carta img {
+    width: 100px;
+    height: 100px;
+}
+
+.face {
+    width: 100%;
+    height: 100%;
+    background-color: #a7e9af;
+    border: 1px solid #99cea8;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: all .5s;
+    transform-style: preserve-3d;
+}
+
+.frente {
+    transform: rotateY(180deg);
+}
+
+.frente.girar {
+    transform: rotateY(0deg);
+}
+
+.verso.girar {
+    transform: rotateY(-180deg);
+}

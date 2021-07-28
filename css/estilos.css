@@ -57,10 +57,10 @@ body {
     transform: rotateY(180deg);
 }
 
-.frente.girar {
+.carta.girar .frente {
     transform: rotateY(0deg);
 }
 
-.verso.girar {
+.carta.girar .verso {
     transform: rotateY(-180deg);
 }

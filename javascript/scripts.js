@@ -46,8 +46,46 @@ function montarJogo() {
 montarJogo();
 
 function girarCarta(carta) {
-    const verso = carta.querySelector(".verso");
-    const frente = carta.querySelector(".frente");
-    verso.classList.add("girar");
-    frente.classList.add("girar");
+    carta.classList.add("girar");
+}
+
+function desgirarCarta(carta) {
+    carta.classList.remove("girar");
+}
+
+let acertos = 0;
+let cartas_viradas = 0;
+let jogadas = 0;
+let carta1;
+let carta2;
+
+function verificarAcerto(primeiro,segundo) {
+    if ( primeiro.innerHTML === segundo.innerHTML ) {
+        acertos++;
+    }
+    else {
+        setTimeout(desgirarCarta, 1000, primeiro);
+        setTimeout(desgirarCarta, 1000, segundo);
+    }
+
+    cartas_viradas = 0;
+    carta1 = undefined;
+    carta2 = undefined;
+}
+
+function escolherCarta(carta) {
+    if ( carta.classList.contains("girar") === false ) {
+        girarCarta(carta);
+        cartas_viradas++;
+
+        if ( cartas_viradas === 2 ) {
+        carta2 = carta;
+        verificarAcerto(carta1,carta2);
+        }
+        else {
+        carta1 = carta;
+        }
+
+        jogadas++;
+    }
 }

@@ -71,21 +71,24 @@ function verificarAcerto(primeiro,segundo) {
     cartas_viradas = 0;
     carta1 = undefined;
     carta2 = undefined;
+
+    if ( acertos === qtd_cartas/2 ){
+        setTimeout(alert, 150, `Você ganhou em ${jogadas} jogadas!`);
+    }
 }
 
 function escolherCarta(carta) {
     if ( carta.classList.contains("girar") === false ) {
         girarCarta(carta);
+        jogadas++;
         cartas_viradas++;
 
         if ( cartas_viradas === 2 ) {
-        carta2 = carta;
-        verificarAcerto(carta1,carta2);
+            carta2 = carta;
+            verificarAcerto(carta1,carta2);
         }
         else {
-        carta1 = carta;
+            carta1 = carta;
         }
-
-        jogadas++;
     }
 }

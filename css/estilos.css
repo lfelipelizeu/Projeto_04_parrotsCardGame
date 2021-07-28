@@ -14,6 +14,10 @@ body {
     margin: 40px 50px 50px;
 }
 
+.baralho {
+    display: none;
+}
+
 .conteudo {
     width: 100%;
     padding: 0 120px;

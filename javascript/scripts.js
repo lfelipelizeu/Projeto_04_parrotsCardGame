@@ -1,13 +1,4 @@
-const baralho = Array.from(document.querySelectorAll(".carta"));
-
-function converterBaralho() {
-    let i;
-    for (i = 0; i < baralho.length; i++) {
-        baralho[i] = baralho[i].outerHTML;
-    }
-}
-
-converterBaralho();
+const gifs = ["bobrossparrot", "explodyparrot", "fiestaparrot", "metalparrot", "revertitparrot", "tripletsparrot", "unicornparrot"];
 
 let qtd_cartas;
 
@@ -27,19 +18,26 @@ function comparador() {
 }
 
 function montarJogo() {
-    const cartas_exibidas = [];
+    const baralho = [];
 
-    let i;
-    for ( i = 0; i < qtd_cartas; i++ ) {
-        cartas_exibidas.push(baralho[i]);
+    for ( let i = 0; i < qtd_cartas/2; i++ ) {
+        baralho.push(gifs[i]);
+        baralho.push(gifs[i]);
     }
 
-    cartas_exibidas.sort(comparador);
+    baralho.sort(comparador);
 
     const jogo = document.querySelector(".conteudo");
     jogo.innerHTML = "";
-    for ( i = 0; i < qtd_cartas; i++ ) {
-        jogo.innerHTML += cartas_exibidas[i];
+    for ( let i = 0; i < qtd_cartas; i++ ) {
+        jogo.innerHTML += `<div class="carta" onclick="escolherCarta(this);">
+                                <div class="verso face">
+                                    <img src="assets/imagens/front.png" />
+                                </div>
+                                <div class="frente face">
+                                    <img src="assets/gifs/${baralho[i]}.gif" />
+                                </div>
+                            </div>`;
     }
 }
 

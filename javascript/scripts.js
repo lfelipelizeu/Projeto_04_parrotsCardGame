@@ -1,32 +1,30 @@
 const gifs = ["bobrossparrot", "explodyparrot", "fiestaparrot", "metalparrot", "revertitparrot", "tripletsparrot", "unicornparrot"];
 
 let qtd_cartas;
-
-while ( qtd_cartas === undefined ) {
-     const qtd = Number(prompt("Com quantas cartas você quer jogar?"));
-
-    if ( qtd>=4 && qtd<=14 && qtd%2===0 ) {
-         qtd_cartas = qtd;
-    }
-    else {
-        alert("Insira um número par entre 4 e 14!");
-    }
-}
-
-function comparador() { 
-	return Math.random() - 0.5; 
-}
-
+let acertos = 0;
+let cartas_viradas = 0;
+let jogadas = 0;
 let tempo = 0;
 let id_interval;
 
-function contarTempo() {
-    const timer = document.querySelector(".tempo");
-    
-    id_interval = setInterval( function () {
-        tempo++;
-        timer.innerHTML = tempo;
-    }, 1000 );
+function perguntarQtdCartas (){
+    while ( qtd_cartas === undefined ) {
+        const qtd = Number(prompt("Com quantas cartas você quer jogar?"));
+   
+       if ( qtd>=4 && qtd<=14 && qtd%2===0 ) {
+            qtd_cartas = qtd;
+            montarJogo();
+       }
+       else {
+           alert("Insira um número par entre 4 e 14!");
+       }
+   }
+}
+
+perguntarQtdCartas();
+
+function comparador() { 
+	return Math.random() - 0.5; 
 }
 
 function montarJogo() {
@@ -55,7 +53,14 @@ function montarJogo() {
     contarTempo();
 }
 
-montarJogo();
+function contarTempo() {
+    const timer = document.querySelector(".tempo");
+    
+    id_interval = setInterval( function () {
+        tempo++;
+        timer.innerHTML = tempo;
+    }, 1000 );
+}
 
 function girarCarta(carta) {
     carta.classList.add("girar");
@@ -65,11 +70,18 @@ function desgirarCarta(carta) {
     carta.classList.remove("girar");
 }
 
-let acertos = 0;
-let cartas_viradas = 0;
-let jogadas = 0;
 let carta1;
 let carta2;
+
+function jogarNovamente() {
+    if ( confirm("Deseja jogar novamente?") ) {
+        qtd_cartas = undefined;
+        acertos = 0;
+        jogadas = 0;
+        tempo = 0;
+        perguntarQtdCartas();
+    }
+}
 
 function verificarAcerto(primeiro,segundo) {
     if ( primeiro.innerHTML === segundo.innerHTML ) {
@@ -87,6 +99,7 @@ function verificarAcerto(primeiro,segundo) {
     if ( acertos === qtd_cartas/2 ){
         clearInterval(id_interval);
         setTimeout(alert, 150, `Você ganhou em ${tempo} segundos e ${jogadas} jogadas!`);
+        setTimeout(jogarNovamente, 300);
     }
 }
 

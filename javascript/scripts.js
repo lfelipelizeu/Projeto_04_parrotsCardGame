@@ -40,8 +40,8 @@ function montarJogo() {
     const jogo = document.querySelector(".conteudo");
     jogo.innerHTML = "";
     for ( let i = 0; i < qtd_cartas; i++ ) {
-        jogo.innerHTML += `<div class="carta" onclick="escolherCarta(this);">
-                                <div class="verso face">
+        jogo.innerHTML += `<div class="carta">
+                                <div class="verso face" onclick="escolherCarta(this)";>
                                     <img src="assets/imagens/front.png" />
                                 </div>
                                 <div class="frente face">
@@ -63,11 +63,7 @@ function contarTempo() {
 }
 
 function girarCarta(carta) {
-    carta.classList.add("girar");
-}
-
-function desgirarCarta(carta) {
-    carta.classList.remove("girar");
+    carta.classList.toggle("girar");
 }
 
 let carta1;
@@ -88,8 +84,8 @@ function verificarAcerto(primeiro,segundo) {
         acertos++;
     }
     else {
-        setTimeout(desgirarCarta, 1000, primeiro);
-        setTimeout(desgirarCarta, 1000, segundo);
+        setTimeout(girarCarta, 1000, primeiro);
+        setTimeout(girarCarta, 1000, segundo);
     }
 
     cartas_viradas = 0;
@@ -103,11 +99,17 @@ function verificarAcerto(primeiro,segundo) {
     }
 }
 
-function escolherCarta(carta) {
-    if ( carta.classList.contains("girar") === false ) {
+function escolherCarta(verso) {
+    /*if ( carta.classList.contains("girar") === false ) {
         girarCarta(carta);
         jogadas++;
+        cartas_viradas++;*/
+
+        const carta = verso.parentNode;
+        jogadas++;
         cartas_viradas++;
+
+        girarCarta(carta);
 
         if ( cartas_viradas === 2 ) {
             carta2 = carta;
@@ -116,5 +118,5 @@ function escolherCarta(carta) {
         else {
             carta1 = carta;
         }
-    }
+    //}
 }

@@ -17,6 +17,18 @@ function comparador() {
 	return Math.random() - 0.5; 
 }
 
+let tempo = 0;
+let id_interval;
+
+function contarTempo() {
+    const timer = document.querySelector(".tempo");
+    
+    id_interval = setInterval( function () {
+        tempo++;
+        timer.innerHTML = tempo;
+    }, 1000 );
+}
+
 function montarJogo() {
     const baralho = [];
 
@@ -39,6 +51,8 @@ function montarJogo() {
                                 </div>
                             </div>`;
     }
+
+    contarTempo();
 }
 
 montarJogo();
@@ -71,7 +85,8 @@ function verificarAcerto(primeiro,segundo) {
     carta2 = undefined;
 
     if ( acertos === qtd_cartas/2 ){
-        setTimeout(alert, 150, `Você ganhou em ${jogadas} jogadas!`);
+        clearInterval(id_interval);
+        setTimeout(alert, 150, `Você ganhou em ${tempo} segundos e ${jogadas} jogadas!`);
     }
 }
 

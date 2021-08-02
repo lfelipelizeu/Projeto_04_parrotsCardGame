@@ -4,6 +4,16 @@ body {
     background-color: #e5e5e5;
 }
 
+.topo {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.tempo {
+    font-size: 25px;
+}
+
 .titulo {
     font-family: 'Roboto', sans-serif;
     font-size: 56px;
